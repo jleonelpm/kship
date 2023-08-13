@@ -3,7 +3,9 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth-service';
-
+import { StorageService } from 'src/app/services/storage.service';
+//https://www.bezkoder.com/angular-14-jwt-auth/#Authentication_Service
+//https://jasonwatmore.com/post/2022/11/08/angular-http-request-error-handling-with-the-httpclient
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +14,7 @@ import { AuthService } from 'src/app/services/auth-service';
 export class LoginComponent implements OnInit {
 
   loginForm:FormGroup=new FormGroup({
-    email:new FormControl('',[Validators.email,Validators.required]),
+    email:new FormControl('',[Validators.required,Validators.minLength(5)]),
     password:new FormControl('',[Validators.required,Validators.minLength(6)])
   });
 
@@ -25,17 +27,23 @@ export class LoginComponent implements OnInit {
 
   showPassword:boolean=false;
 
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+
   authService = inject(AuthService);
 
    user?:User;
 
-  constructor(private fb:FormBuilder, private router:Router){
+  constructor(private fb:FormBuilder, private router:Router, private storageService:StorageService){
 
 
   }
   
   ngOnInit(): void {
-   
+   if(this.storageService.isLoggedIn()){
+    this.isSuccessful=true;
+   }
   }
 
   doLogin(){
@@ -44,15 +52,36 @@ export class LoginComponent implements OnInit {
       this.status='loading';
       const{email,password} = this.loginForm.getRawValue();
        
-      this.authService.login(email,password).subscribe(data=>{
-        this.user=data;
-        console.log(this.user);
-      });
+      this.authService.login(email,password).subscribe(
+        {
+          next:data=>{
+            
+            this.storageService.saveUser(data);
+            this.isSuccessful=true;
+            this.isSignUpFailed=false;
+            this.router.navigate(['/dashboard']);
+            
+          },
+          error:err=>{
+            switch(err.status){
+              case 401:
+                this.errorMessage="Usuario o Password incorrecto";
+                break;
+              default:
+                this.errorMessage="Se produjo un error con el codigo" + err.status;
+              
+            }
+            
+            this.isSignUpFailed=true;
+           
+          }
+        }
+      );
       
 
     }
     else{
-      console.log("onvalia");
+      alert('Formulario Incorrecto');
       this.loginForm.markAllAsTouched();
     }
   }
@@ -65,6 +94,10 @@ export class LoginComponent implements OnInit {
  hasError(name: string, errorCode: string) {
   const control = this.loginForm.get(name);
   return control?.hasError(errorCode) && control.touched;
+}
+
+reloadPage(): void {
+  window.location.reload();
 }
 
 }

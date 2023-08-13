@@ -17,21 +17,24 @@ export class AuthService{
         return !!localStorage.getItem('token');
     }
     login(username: string, password: string) {
-        return this.http.post(`${environment.apiUrl}/auth/login`, { username, password }).pipe(catchError(this.handleError));
+        //return this.http.post(`${environment.apiUrl}/auth/login`, { username, password }).pipe(catchError(this.handleError));
+        return this.http.post(`${environment.apiUrl}/auth/login`, { username, password });
     }
+
+   
 
     private handleError(error: HttpErrorResponse) {
         if (error.status === 0) {
           // A client-side or network error occurred. Handle it accordingly.
-          console.error('An error occurred:', error.error);
+          console.error('Ha ocurrido el error:', error.error);
         } else {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong.
           console.error(
-            `Backend returned code ${error.status}, body was: `, error.error);
+            `Se encontro el error ${error.status}, la respuesta es: `, error.error);
         }
         // Return an observable with a user-facing error message.
-        return throwError(() => new Error('Something bad happened; please try again later.'));
+        return throwError(() => new Error('Ha ocurrido un error.'));
       }
 
 
