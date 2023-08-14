@@ -19,6 +19,7 @@ export class AuthService{
     login(username: string, password: string) {
         //return this.http.post(`${environment.apiUrl}/auth/login`, { username, password }).pipe(catchError(this.handleError));
         return this.http.post(`${environment.apiUrl}/auth/login`, { username, password });
+        
     }
 
    
