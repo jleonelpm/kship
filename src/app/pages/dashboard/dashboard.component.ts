@@ -10,13 +10,10 @@ export class DashboardComponent implements OnInit{
 
   constructor(private storageService:StorageService){}
   token:String="";
-  
-  
+
   ngOnInit(): void {
    var  user = this.storageService.getUser()
     this.token = user["token"];
   }
-
-  
 
 }

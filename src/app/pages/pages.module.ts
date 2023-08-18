@@ -4,14 +4,14 @@ import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProductosListComponent } from '../components/productos-list/productos-list.component';
 
 
 @NgModule({
   declarations: [
-    
-  
     PagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProductosListComponent
   ],
   imports: [
     CommonModule,

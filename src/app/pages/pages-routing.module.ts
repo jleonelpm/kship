@@ -7,6 +7,7 @@ import { ProductosComponent } from "../dashboard/productos/productos.component";
 import { authGuard } from "../helpers/auth.guard";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { PagesComponent } from "./pages.component";
+import { ProductosListComponent } from "../components/productos-list/productos-list.component";
 
 const routes: Routes = [{
 
@@ -15,7 +16,9 @@ const routes: Routes = [{
     children: [
         { path: '', component: DashboardComponent },
         {path:'categorias', component:CategoriasComponent},
-        {path:'productos', component:ProductosComponent},
+        //{path:'productos', component:ProductosComponent},
+        { path: 'productos', component: ProductosListComponent },
+
         {path:'ordenes', component:OrdenesComponent},
     ]
 
