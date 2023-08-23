@@ -16,14 +16,15 @@ import { OrdenesComponent } from './dashboard/ordenes/ordenes.component';
     CategoriasComponent,
     ProductosComponent,
     OrdenesComponent,
-   
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     PagesModule,
     HttpClientModule,
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

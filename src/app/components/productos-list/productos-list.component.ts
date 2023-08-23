@@ -25,13 +25,13 @@ export class ProductosListComponent implements OnInit {
   }
 
   retrieveProductos() {
-    this.ApiServiceService.getAll()
+    this.ApiServiceService.getAllProductos()
       .subscribe({
         next: (data) => {
           this.productos = data;
           this.cantidadProductos = this.productos.length;
           console.log(data);
-          //console.log("Ingreso en Next");
+          console.log("Ingreso en Next");
         },
         error: (e) => {
           console.log("se produjo error");

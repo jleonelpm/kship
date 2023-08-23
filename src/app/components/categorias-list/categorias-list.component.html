@@ -3,26 +3,26 @@
     <div class="input-group mb-3"></div>
   </div>
   <div class="col-md-6">
-    <h4>Products List {{ cantidadProductos }}</h4>
-    <table class="table table-striped" id="lstproductos">
+    <h4>Categories List {{ cantidadCategorias }}</h4>
+    <table class="table table-striped" id="lstcategorias">
       <thead>
         <tr>
           <th scope="col">Codigo</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Precio</th>
+          <th scope="col">Imagen</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of productos; index as i">
+        <tr *ngFor="let item of categorias; index as i">
           <th scope="row">{{ i + 1 }}</th>
           <td>
-            {{ item.codigo }}
+            {{ item.id }}
           </td>
           <td>
             {{ item.nombre }}
           </td>
           <td>
-            {{ item.precio_costo }}
+            {{ item.imagen }}
           </td>
         </tr>
       </tbody>

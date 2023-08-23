@@ -5,19 +5,18 @@ import { SharedModule } from '../shared/shared.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductosListComponent } from '../components/productos-list/productos-list.component';
-
+import { CategoriasListComponent } from '../components/categorias-list/categorias-list.component';
+import { OrdenesListComponent } from '../components/ordenes-list/ordenes-list.component';
 
 @NgModule({
   declarations: [
     PagesComponent,
     DashboardComponent,
-    ProductosListComponent
+    ProductosListComponent,
+    CategoriasListComponent,
+    OrdenesListComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    PagesRoutingModule,
-  ],
-  exports:[DashboardComponent]
+  imports: [CommonModule, SharedModule, PagesRoutingModule],
+  exports: [DashboardComponent],
 })
-export class PagesModule { }
+export class PagesModule {}
